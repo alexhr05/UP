@@ -3,22 +3,38 @@
 
 using namespace std;
 
-char* censor(char* str, int size){
-    
-    for(int i = 0; i < size; i++){
-        if(str[i] >= '0' && str[i] <= '9'){
+const int maxSize = 100;
+
+int strLen(char* str) {
+    int counter = 0;
+
+    while (*str != '\0') {
+        counter++;
+        str++;
+    }
+
+    return counter;
+}
+char* censor(char* str) {
+    int strLength = strLen(str);
+    for (int i = 0; i < strLength; i++) {
+        if (str[i] >= '0' && str[i] <= '9') {
             str[i] = '*';
         }
     }
-    
-    
+
     return str;
-} 
+}
+
 
 int main() {
-    int sizeStr = 10;
-    char* str[] = new char[sizeStr];
+    
+    char* str = new char[maxSize];
 
-    cout<<censor(str,size);
+    cout << "Enter string:";
+    cin.getline(str, maxSize);
+    cout << censor(str);
+
+    delete[] str;
     return 0;
 }
