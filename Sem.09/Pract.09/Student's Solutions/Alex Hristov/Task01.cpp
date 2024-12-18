@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const int maxSize = 100;
+const int MAX_SIZE = 100;
 
 int strLen(char* str) {
     int counter = 0;
@@ -17,24 +17,33 @@ int strLen(char* str) {
 }
 char* censor(char* str) {
     int strLength = strLen(str);
+    char* buff = new char[strLength + 1];
+
     for (int i = 0; i < strLength; i++) {
         if (str[i] >= '0' && str[i] <= '9') {
-            str[i] = '*';
+            buff[i] = '*';
+        }
+        else {
+            buff[i] = str[i];
         }
     }
 
-    return str;
+    buff[strLength] = '\0';
+
+    return buff;
 }
 
 
 int main() {
     
-    char* str = new char[maxSize];
+    char str[MAX_SIZE];
 
     cout << "Enter string:";
-    cin.getline(str, maxSize);
-    cout << censor(str);
+    cin.getline(str, MAX_SIZE);
+    char* result = censor(str);
+    
+    cout << result;
 
-    delete[] str;
+    delete[] result;
     return 0;
 }
